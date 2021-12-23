@@ -1,16 +1,15 @@
 <p align="center">
-  <img src="https://github.com/gabriel-nt/GoBarber-Frontend/blob/master/src/assets/logo.svg" alt="GoBarber" />
+  <img src="" alt="GoVet" />
 </p>
 
 <h1 align="center">
-    🚀 GoBarber
+    🚀 GoVet
 </h1>
-<p align="center">Aplicação GoBarber Frontend</p>
+<p align="center">Aplicação GoVet Frontend</p>
 
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=react&message=16.13.1&color=61DAFB&logo=react" />
   <img src="https://img.shields.io/static/v1?label=typescript&message=4.0.2&color=blue&logo=typescript" />
-  <!--<img src="https://img.shields.io/badge/repo%20size-2.00%20MB-informational" />-->
   <img src="https://img.shields.io/badge/last%20commit-october-orange" />
   <img src="https://img.shields.io/badge/license-MIT-success"/>
 </p>
@@ -24,12 +23,12 @@
 </p>
 
 <h3 align="center"> 
-🚧  Finalizado  🚧
+🚧  Em produção  🚧
 </h3>
 
 ### 🖥 Demonstração
 <p>
-   <img src="https://github.com/gabriel-nt/GoBarber-Frontend/blob/master/src/assets/GoBarber.gif" alt="Dashboard" width="800"/>
+  
 </p>
 
 ### 📎 Features
@@ -49,14 +48,11 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e/ou [Yarn](https://https://yarnpkg.com/) 
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-### 🛠 Configurar Backend
-Para que a aplicação funcione, precisa antes ser configurado o backend da aplicação. Caso não tenha configurado, acesse esse [repositório](https://github.com/gabriel-nt/GoBarber-Backend) e execute o passo a passo da descrição do projeto
-
-### 🎲 Rodando Frontend
+### 🎲 Rodando a Aplicação (web)
 
 ```bash
 # Clone este repositório
-$ git clone https://github.com/gabriel-nt/GoBarber-Frontend
+$ git clone https://github.com/gustavo-nt/govet
 
 # Instale as dependências
 $ yarn
@@ -109,5 +105,5 @@ Esse projeto está sob a licença MIT.
 
 <hr/>
 
-Feito por Gabriel Teixeira
+Feito por Gustavo Teixeira e Gabriel Teixeira
 
