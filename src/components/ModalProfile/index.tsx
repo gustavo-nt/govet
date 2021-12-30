@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { IoMdClose } from 'react-icons/io';
+import { FiCheck } from 'react-icons/fi';
+import ReactLoading from 'react-loading';
 import Button from '../Button';
 import { Avatar } from '../../utils/lists';
 import { colors } from '../../styles/colors';
 
 import { Container, Content, ContentLoading, CheckContent } from './styles';
-import { IoMdClose } from 'react-icons/io';
-import { FiCheck } from 'react-icons/fi';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
-import ReactLoading from "react-loading";
 
 interface ModalProfileProps {
   isOpen: boolean;
@@ -22,7 +22,10 @@ interface ProfileImageProps {
   image: string;
 }
 
-const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onRequestClose }) => {
+const ModalProfile: React.FC<ModalProfileProps> = ({
+  isOpen,
+  onRequestClose,
+}) => {
   const { addToast } = useToast();
   const { user, updateUser } = useAuth();
 
@@ -31,51 +34,48 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onRequestClose }) =
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout((e) => {
+      setTimeout(e => {
         setIsLoading(false);
         setImageProfile(user.avatar);
       }, 1000);
     }
-  }, [isOpen]);
+  }, [isOpen, user.avatar]);
 
-  function handleChangeImageProfile(item: ProfileImageProps) {
+  function handleChangeImageProfile(item: ProfileImageProps): void {
     setImageProfile(imageProfile === item.image ? '' : item.image);
   }
 
-  function handleCloseModal() {
+  const handleCloseModal = useCallback(() => {
     onRequestClose();
     setIsLoading(true);
-  }
+  }, [onRequestClose]);
 
-  const handleAvatarChange = useCallback(
-    async () => {
-      const response = await api.patch('/users/avatar', {
-        avatarFilename: imageProfile
+  const handleAvatarChange = useCallback(async () => {
+    const response = await api.patch('/users/avatar', {
+      avatarFilename: imageProfile,
+    });
+
+    try {
+      updateUser(response.data);
+
+      addToast({
+        type: 'success',
+        title: 'Perfil atualizado!',
+        description: 'Suas informações de perfil foram atualizadas',
       });
 
-      try {
-        updateUser(response.data);
+      handleCloseModal();
+    } catch (e) {
+      addToast({
+        type: 'error',
+        title: 'Erro ao atualizar imagem',
+        description:
+          'Ocorreu um erro ao atualizar sua imagem de perfil, tente novamente.',
+      });
 
-        addToast({
-          type: 'success',
-          title: 'Perfil atualizado!',
-          description: 'Suas informações de perfil foram atualizadas',
-        });
-
-        handleCloseModal();
-      } catch (e) {
-        addToast({
-          type: 'error',
-          title: 'Erro ao atualizar imagem',
-          description:
-            'Ocorreu um erro ao atualizar sua imagem de perfil, tente novamente.',
-        });
-
-        handleCloseModal();
-      }
-    },
-    [addToast, updateUser, imageProfile],
-  );
+      handleCloseModal();
+    }
+  }, [addToast, updateUser, imageProfile, handleCloseModal]);
 
   return (
     <Modal
@@ -97,12 +97,13 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onRequestClose }) =
 
         {isLoading ? (
           <ContentLoading>
-            <ReactLoading type={'bubbles'} color={colors.green400} />
+            <ReactLoading type="bubbles" color={colors.green400} />
           </ContentLoading>
         ) : (
           <Content>
             {Avatar.map((item, index) => (
-              <div key={index}
+              <div
+                key={index}
                 className="content-item"
                 onClick={() => handleChangeImageProfile(item)}
               >
@@ -118,15 +119,18 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onRequestClose }) =
         )}
 
         <div className="footer">
-          <Button onClick={handleAvatarChange}
-            disabled={isLoading || imageProfile === user.avatar || !imageProfile}
+          <Button
+            onClick={handleAvatarChange}
+            disabled={
+              isLoading || imageProfile === user.avatar || !imageProfile
+            }
           >
             Concluir
           </Button>
         </div>
       </Container>
     </Modal>
-  )
+  );
 };
 
 export default ModalProfile;

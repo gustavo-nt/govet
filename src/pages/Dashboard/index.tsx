@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
-import { isToday, format, isAfter } from 'date-fns';
+import { isToday, format, isAfter, addHours } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import { FiPower, FiClock } from 'react-icons/fi';
+import { FiPower, FiClock, FiPlus } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 
 import 'react-day-picker/lib/style.css';
@@ -19,11 +19,14 @@ import {
   NextAppointment,
   Section,
   Appointment,
+  ButtonAdd,
 } from './styles';
 
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import Logo from '../../components/Logo';
+
+import Modal from '../../components/Modal';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -48,6 +51,11 @@ const Dashboard: React.FC = () => {
     MonthAvailabilityItem[]
   >([]);
 
+  const [
+    isOpenModalCreateAppointment,
+    setIsOpenModalCreateAppoitment,
+  ] = useState(false);
+
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
@@ -55,6 +63,14 @@ const Dashboard: React.FC = () => {
       setSelectedDate(day);
     }
   }, []);
+
+  const handleCloseModalCreateAppointment = (): void => {
+    setIsOpenModalCreateAppoitment(false);
+  };
+
+  const handleOpenModalCreateAppointment = (): void => {
+    setIsOpenModalCreateAppoitment(true);
+  };
 
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
@@ -75,25 +91,33 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get<Appointment[]>('/appointments/me', {
-        params: {
-          year: selectedDate.getFullYear(),
-          month: selectedDate.getMonth() + 1,
-          day: selectedDate.getDate(),
-          // day: selectedDate.getDate(),
+      .get<Appointment[]>(
+        `/appointments/${user.type === 'admin' ? 'admin' : 'me'}`,
+        {
+          params: {
+            year: selectedDate.getFullYear(),
+            month: selectedDate.getMonth() + 1,
+            day: selectedDate.getDate(),
+          },
         },
-      })
+      )
       .then(response => {
         const appointmentsFormatted = response.data.map(appointment => {
           return {
             ...appointment,
-            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+            hourFormatted: format(
+              addHours(parseISO(appointment.date), 3),
+              'HH:mm',
+              {
+                locale: ptBR,
+              },
+            ),
           };
         });
 
         setAppointments(appointmentsFormatted);
       });
-  }, [selectedDate]);
+  }, [selectedDate, user.type]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
@@ -121,13 +145,13 @@ const Dashboard: React.FC = () => {
 
   const morningAppointments = useMemo(() => {
     return appointments.filter(appointment => {
-      return parseISO(appointment.date).getHours() < 12;
+      return parseISO(appointment.date).getHours() + 3 < 12;
     });
   }, [appointments]);
 
   const afternoonAppointments = useMemo(() => {
     return appointments.filter(appointment => {
-      return parseISO(appointment.date).getHours() > 12;
+      return parseISO(appointment.date).getHours() + 3 > 12;
     });
   }, [appointments]);
 
@@ -141,7 +165,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <Logo className='dashboard'/>
+          <Logo className="dashboard" />
 
           <Profile>
             <img src={user.avatar} alt={user.name} />
@@ -162,7 +186,18 @@ const Dashboard: React.FC = () => {
 
       <Content>
         <Schedule>
-          <h1>Horários Agendamentos</h1>
+          <div>
+            <h1>
+              {user.type === 'admin'
+                ? 'Horários Agendamentos'
+                : 'Meus Agendamentos'}
+            </h1>
+            {user.type === 'client' && (
+              <ButtonAdd onClick={handleOpenModalCreateAppointment}>
+                <FiPlus />
+              </ButtonAdd>
+            )}
+          </div>
           <p>
             {isToday(selectedDate) && <span>Hoje</span>}
             <span>{selectedDateAsText}</span>
@@ -179,7 +214,7 @@ const Dashboard: React.FC = () => {
                   alt={nextAppointment.user.name}
                 />
 
-                <strong>Gabriel</strong>
+                <strong>{nextAppointment.user.name}</strong>
                 <span>
                   <FiClock />
                   {nextAppointment.hourFormatted}
@@ -239,9 +274,9 @@ const Dashboard: React.FC = () => {
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
             fromMonth={new Date()}
-            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
+            disabledDays={[{ daysOfWeek: [0] }, ...disabledDays]}
             modifiers={{
-              available: { daysOfWeek: [1, 2, 3, 4, 5] },
+              available: { daysOfWeek: [1, 2, 3, 4, 5, 6] },
             }}
             onMonthChange={handleMonthChange}
             selectedDays={selectedDate}
@@ -263,6 +298,13 @@ const Dashboard: React.FC = () => {
           />
         </Calendar>
       </Content>
+
+      {isOpenModalCreateAppointment && user.type === 'client' && (
+        <Modal
+          isOpen={isOpenModalCreateAppointment}
+          onRequestClose={handleCloseModalCreateAppointment}
+        />
+      )}
     </Container>
   );
 };
