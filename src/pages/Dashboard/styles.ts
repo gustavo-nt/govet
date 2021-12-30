@@ -76,6 +76,12 @@ export const Schedule = styled.div`
   flex: 1;
   margin-right: 120px;
 
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   h1 {
     font-size: 36px;
   }
@@ -302,5 +308,23 @@ export const Appointment = styled.div`
       font-size: 20px;
       color: ${colors.white};
     }
+  }
+`;
+
+export const ButtonAdd = styled.button`
+  background: ${colors.green400};
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+
+  svg {
+    color: ${colors.white};
+    font-size: 1.15rem;
+  }
+
+  &:hover {
+    background: ${shade(0.2, colors.green400)};
   }
 `;

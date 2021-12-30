@@ -6,6 +6,7 @@ interface User {
   avatar: string;
   name: string;
   email: string;
+  type: 'admin' | 'client';
 }
 
 interface AuthState {
@@ -43,7 +44,11 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password, type }) => {
-    const response = await api.post('sessions/administrator', { email, password, type });
+    const response = await api.post('sessions', {
+      email,
+      password,
+      type: 'client',
+    });
 
     const { token, user } = response.data;
 

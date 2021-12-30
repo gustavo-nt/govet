@@ -48,6 +48,29 @@ export default createGlobalStyle`
     margin: 0 1rem;
     position: relative;
     border-radius: 0.24rem;
+
+    &.appointment {
+      max-width: 532px;
+      height: 90%;
+      overflow: auto;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #3e3b47;
+        border-radius: 10px;
+      }
+    }
   }
 
   .react-modal-close {
@@ -55,7 +78,7 @@ export default createGlobalStyle`
     right: 1.5rem;
     top: 1.5rem;
     border: 0;
-    
+
     transition: filter .2s;
     background: transparent;
 
