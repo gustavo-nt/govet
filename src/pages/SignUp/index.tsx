@@ -15,11 +15,13 @@ import { useToast } from '../../hooks/toast';
 
 import { Container, Content, AnimationContainer, Background, CopyrightBack } from './styles';
 import Logo from '../../components/Logo';
+import Checkbox from '../../components/Checkbox';
 
 interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  type: string;
 }
 
 const SignUp: React.FC = () => {
@@ -39,6 +41,8 @@ const SignUp: React.FC = () => {
             .email('Digite um e-mail válido'),
           password: Yup.string().min(6, 'No minímo 6 dígitos'),
         });
+
+        data.type = data.type ? 'admin' : 'client';
 
         await schema.validate(data, {
           abortEarly: false,
@@ -92,6 +96,11 @@ const SignUp: React.FC = () => {
               name="password"
               type="password"
               placeholder="Senha"
+            />
+
+            <Checkbox 
+              identifier="type"
+              title="Você é um administrator?"  
             />
 
             <Button type="submit">Cadastrar</Button>

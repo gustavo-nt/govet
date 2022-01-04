@@ -15,10 +15,12 @@ import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background, CopyrightBack } from './styles';
 import Logo from '../../components/Logo';
+import Checkbox from '../../components/Checkbox';
 
 interface SignInFormData {
   email: string;
   password: string;
+  isAdmin: boolean;
 }
 
 const SignIn: React.FC = () => {
@@ -46,7 +48,7 @@ const SignIn: React.FC = () => {
         await signIn({
           email: data.email,
           password: data.password,
-          type: 'admin'
+          type: data.isAdmin ? 'admin' : 'client'
         });
 
         history.push('/dashboard');
@@ -82,6 +84,11 @@ const SignIn: React.FC = () => {
               name="password"
               type="password"
               placeholder="Senha"
+            />
+
+            <Checkbox 
+              identifier="isAdmin"
+              title="Você é um administrator?"  
             />
 
             <Button type="submit">Entrar</Button>

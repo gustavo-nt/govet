@@ -139,7 +139,7 @@ const Profile: React.FC = () => {
           ref={formRef}
         >
           <AvatarInput onClick={handleOpenChangeProfileImage}>
-            {user.avatar ? (
+            {user.avatar !== 'images/profiles/default.jpg' ? (
               <div className='edit-image'>
                 <img src={user.avatar} alt={user.name} />
                 <div>
