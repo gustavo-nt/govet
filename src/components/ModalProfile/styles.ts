@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colors } from './../../styles/colors';
+import { colors } from '../../styles/colors';
 
 interface CheckProps {
   isVisible: boolean;
@@ -58,9 +58,8 @@ export const CheckContent = styled.div<CheckProps>`
     props.isVisible &&
     css`
       opacity: 1;
-    `
-  }
-  
+    `}
+
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -69,5 +68,5 @@ export const CheckContent = styled.div<CheckProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 `;
