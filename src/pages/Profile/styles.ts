@@ -1,4 +1,3 @@
-import { Header } from './../Dashboard/styles';
 import styled from 'styled-components';
 
 import { shade } from 'polished';

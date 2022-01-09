@@ -92,7 +92,10 @@ const SignIn: React.FC = () => {
               placeholder="Senha"
             />
 
-            <Checkbox identifier="isAdmin" title="Você é um administrator?" />
+            <Checkbox 
+              identifier="isAdmin"
+              title="Você é um empresário?"  
+            />
 
             <Button type="submit">Entrar</Button>
 

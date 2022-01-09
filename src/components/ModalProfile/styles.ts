@@ -70,3 +70,12 @@ export const CheckContent = styled.div<CheckProps>`
   justify-content: center;
   transition: opacity 0.2s;
 `;
+
+export const LinkImage = styled.a`
+  right: 5px;
+  bottom: 5px;
+  font-weight: 500;
+  position: absolute;
+  text-decoration: none;
+  color: ${colors.gray750};
+`;

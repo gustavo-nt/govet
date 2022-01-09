@@ -71,6 +71,16 @@ export const ProviderAvatar = styled.img`
   border-radius: 16px;
 `;
 
+export const ProviderAvatarNotFound = styled.div<ProviderProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: ${props => (props.selected ? '#232129' : '#f4ede8')};
+  }
+`;
+
 export const ProviderName = styled.p<ProviderProps>`
   margin-left: 8px;
   font-size: 16px;

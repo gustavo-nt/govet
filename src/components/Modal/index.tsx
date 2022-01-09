@@ -9,6 +9,7 @@ import {
   Container,
   Providers,
   ProviderAvatar,
+  ProviderAvatarNotFound,
   ProviderContainer,
   ProviderName,
   Calendar,
@@ -19,6 +20,7 @@ import {
 } from './styles';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
+import { MdOutlineHideImage } from 'react-icons/md';
 
 export interface Provider {
   id: string;
@@ -224,7 +226,13 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
               }}
               selected={provider.id === selectedProvider}
             >
-              <ProviderAvatar src={provider.avatar} />
+              {provider.avatar !== 'images/profiles/default.jpg' ? (
+                <ProviderAvatar src={provider.avatar} />
+              ): (
+                <ProviderAvatarNotFound selected={provider.id === selectedProvider}>
+                  <MdOutlineHideImage size={22}/>
+                </ProviderAvatarNotFound>
+              )}
               <ProviderName selected={provider.id === selectedProvider}>
                 {provider.name}
               </ProviderName>

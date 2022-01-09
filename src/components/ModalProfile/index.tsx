@@ -7,7 +7,7 @@ import Button from '../Button';
 import { Avatar } from '../../utils/lists';
 import { colors } from '../../styles/colors';
 
-import { Container, Content, ContentLoading, CheckContent } from './styles';
+import { Container, Content, ContentLoading, CheckContent, LinkImage } from './styles';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -113,6 +113,12 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
                   <FiCheck size={20} />
                 </CheckContent>
                 <img src={item.image} alt={item.name} />
+                <LinkImage 
+                  href={item.link} 
+                  target='_blank' 
+                >
+                  link
+                </LinkImage>
               </div>
             ))}
           </Content>

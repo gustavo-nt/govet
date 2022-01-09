@@ -38,5 +38,11 @@ export const Container = styled.div`
   label {  
     font-size: 15px;
     cursor: pointer;
+    transition: color .3s;
+    color: ${colors.gray200};
+
+    &:hover {
+      color: ${colors.gray300};
+    }
   }
 `;

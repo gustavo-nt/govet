@@ -14,7 +14,6 @@ export const HeaderContent = styled.div`
   max-width: 1028px;
   margin: 0 auto;
   display: flex;
-
   align-items: center;
 
   > img {
@@ -30,6 +29,14 @@ export const HeaderContent = styled.div`
       color: ${colors.gray500};
       width: 20px;
       height: 20px;
+    }
+  }
+
+  @media(max-width: 500px) {
+    justify-content: space-between;
+
+    button {
+      margin-left: 0;
     }
   }
 `;
@@ -64,17 +71,28 @@ export const Profile = styled.div`
       }
     }
   }
+
+  @media(max-width: 500px) {
+    margin-left: 0;
+  }
 `;
 
 export const Content = styled.main`
   max-width: 1120px;
   margin: 64px auto;
+  padding: 0 16px;
   display: flex;
+
+  @media(max-width: 800px) {
+    padding: 0;
+    margin: 32px 16px;
+    flex-direction: column;
+  }
 `;
 
 export const Schedule = styled.div`
   flex: 1;
-  margin-right: 120px;
+  margin-right: 110px;
 
   > div {
     display: flex;
@@ -105,6 +123,31 @@ export const Schedule = styled.div`
       height: 16px;
       background: ${colors.green400};
       margin: 0 8px;
+    }
+  }
+
+  @media(max-width: 930px) {
+    h1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 290px;
+    }
+  }
+
+  @media(max-width: 800px) {
+    margin-right: 0;
+
+    h1 {
+      font-size: 32px;
+      white-space: normal;
+      width: auto;
+    }
+  }
+
+  @media(max-width: 600px) {
+    h1 {
+      font-size: 28px;
     }
   }
 `;
@@ -185,6 +228,17 @@ export const Calendar = styled.aside`
     background: ${colors.green400} !important;
     border-radius: 10px;
     color: #232129 !important;
+  }
+
+  @media(max-width: 800px) {
+    width: 500px;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media(max-width: 600px) {
+    width: 100%;
   }
 `;
 
@@ -353,6 +407,9 @@ export const ButtonAdd = styled.button`
   width: 40px;
   height: 40px;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s ease-in-out;
 
   svg {

@@ -53,7 +53,7 @@ const SignUp: React.FC = () => {
         addToast({
           type: 'success',
           title: 'Cadastro realizado!',
-          description: 'Você já pode fazer o seu logon no GoBarber',
+          description: 'Você já pode fazer o seu logon no GoVet',
         });
 
         history.push('/');
@@ -100,7 +100,7 @@ const SignUp: React.FC = () => {
 
             <Checkbox 
               identifier="type"
-              title="Você é um administrator?"  
+              title="Você é um empresário?"  
             />
 
             <Button type="submit">Cadastrar</Button>
