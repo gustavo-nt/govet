@@ -20,6 +20,7 @@ import {
   Section,
   Appointment,
   ButtonAdd,
+  Description,
 } from './styles';
 
 import { useAuth } from '../../hooks/auth';
@@ -36,8 +37,13 @@ interface MonthAvailabilityItem {
 interface Appointment {
   id: string;
   date: string;
+  description: string;
   hourFormatted: string;
   user: {
+    name: string;
+    avatar: string;
+  };
+  provider: {
     name: string;
     avatar: string;
   };
@@ -45,6 +51,7 @@ interface Appointment {
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
+  const [descriptionShowed, setDescriptionShowed] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
@@ -119,6 +126,17 @@ const Dashboard: React.FC = () => {
       });
   }, [selectedDate, user.type]);
 
+  const handleDescriptionShowed = useCallback(
+    value => {
+      if (value === descriptionShowed) {
+        setDescriptionShowed('');
+      } else {
+        setDescriptionShowed(value);
+      }
+    },
+    [descriptionShowed],
+  );
+
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
       .filter(monthDay => monthDay.available === false)
@@ -144,15 +162,19 @@ const Dashboard: React.FC = () => {
   }, [selectedDate]);
 
   const morningAppointments = useMemo(() => {
-    return appointments.filter(appointment => {
-      return parseISO(appointment.date).getHours() + 3 < 12;
-    });
+    return appointments
+      .filter(appointment => {
+        return parseISO(appointment.date).getHours() + 3 < 12;
+      })
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }, [appointments]);
 
   const afternoonAppointments = useMemo(() => {
-    return appointments.filter(appointment => {
-      return parseISO(appointment.date).getHours() + 3 > 12;
-    });
+    return appointments
+      .filter(appointment => {
+        return parseISO(appointment.date).getHours() + 3 > 12;
+      })
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }, [appointments]);
 
   const nextAppointment = useMemo(() => {
@@ -190,7 +212,7 @@ const Dashboard: React.FC = () => {
             <h1>
               {user.type === 'admin'
                 ? 'Horários Agendamentos'
-                : 'Meus Agendamentos'}
+                : 'Meus Consultas'}
             </h1>
             {user.type === 'client' && (
               <ButtonAdd onClick={handleOpenModalCreateAppointment}>
@@ -210,11 +232,23 @@ const Dashboard: React.FC = () => {
 
               <div>
                 <img
-                  src={nextAppointment.user.avatar}
-                  alt={nextAppointment.user.name}
+                  src={
+                    user.type === 'admin'
+                      ? nextAppointment.user.avatar
+                      : nextAppointment.provider.avatar
+                  }
+                  alt={
+                    user.type === 'admin'
+                      ? nextAppointment.user.name
+                      : nextAppointment.provider.name
+                  }
                 />
 
-                <strong>{nextAppointment.user.name}</strong>
+                <strong>
+                  {user.type === 'admin'
+                    ? nextAppointment.user.name
+                    : nextAppointment.provider.name}
+                </strong>
                 <span>
                   <FiClock />
                   {nextAppointment.hourFormatted}
@@ -236,11 +270,23 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar}
-                    alt={appointment.user.name}
+                    src={
+                      user.type === 'admin'
+                        ? appointment.user.avatar
+                        : appointment.provider.avatar
+                    }
+                    alt={
+                      user.type === 'admin'
+                        ? appointment.user.name
+                        : appointment.provider.name
+                    }
                   />
 
-                  <strong>{appointment.user.name}</strong>
+                  <strong>
+                    {user.type === 'admin'
+                      ? appointment.user.name
+                      : appointment.provider.name}
+                  </strong>
                 </div>
               </Appointment>
             ))}
@@ -260,11 +306,43 @@ const Dashboard: React.FC = () => {
 
                 <div>
                   <img
-                    src={appointment.user.avatar}
-                    alt={appointment.user.name}
+                    src={
+                      user.type === 'admin'
+                        ? appointment.user.avatar
+                        : appointment.provider.avatar
+                    }
+                    alt={
+                      user.type === 'admin'
+                        ? appointment.user.name
+                        : appointment.provider.name
+                    }
                   />
 
-                  <strong>{appointment.user.name}</strong>
+                  <div>
+                    <strong>
+                      {user.type === 'admin'
+                        ? appointment.user.name
+                        : appointment.provider.name}
+                    </strong>
+
+                    {appointment.description && (
+                      <Description
+                        showAll={descriptionShowed === appointment.id}
+                      >
+                        <span>{appointment.description}</span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDescriptionShowed(appointment.id)
+                          }
+                        >
+                          {descriptionShowed === appointment.id
+                            ? 'Ver Menos'
+                            : 'Ver Mais'}
+                        </button>
+                      </Description>
+                    )}
+                  </div>
                 </div>
               </Appointment>
             ))}

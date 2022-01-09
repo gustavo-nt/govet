@@ -47,6 +47,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
 }) => {
   const { addToast } = useToast();
 
+  const [description, setDescription] = useState('');
   const [selectedHour, setSelectedHour] = useState(0);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [selectedProvider, setSelectedProvider] = useState('');
@@ -133,6 +134,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
       date.setMinutes(0);
 
       await api.post('appointments', {
+        description,
         provider_id: selectedProvider,
         date: format(date, 'yyyy-MM-dd HH:mm'),
       });
@@ -151,7 +153,14 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
         description: 'Ocorreu um erro ao criar o agendamento, tente novamente.',
       });
     }
-  }, [selectedProvider, selectedDate, selectedHour, onRequestClose, addToast]);
+  }, [
+    description,
+    selectedProvider,
+    selectedDate,
+    selectedHour,
+    onRequestClose,
+    addToast,
+  ]);
 
   const disabledDays = useMemo(() => {
     const dates = monthAvailability
@@ -293,8 +302,21 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
           ))}
         </Section>
 
+        <Section>
+          <SectionTitle>Descrição da Consulta</SectionTitle>
+          <textarea
+            rows={7}
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="Descreva qual o problema com seu animal"
+          />
+        </Section>
+
         <div className="footer">
-          <Button onClick={handleCreateAppointment} disabled={!selectedHour}>
+          <Button
+            onClick={handleCreateAppointment}
+            disabled={!selectedHour || !description}
+          >
             Concluir
           </Button>
         </div>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { shade } from 'polished';
 import { colors } from '../../styles/colors';
@@ -286,7 +286,7 @@ export const Appointment = styled.div`
     margin-top: 16px;
   }
 
-  div {
+  > div {
     flex: 1;
     background: ${colors.gray650};
     display: flex;
@@ -308,6 +308,42 @@ export const Appointment = styled.div`
       font-size: 20px;
       color: ${colors.white};
     }
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+`;
+
+export const Description = styled.div<{
+  showAll: boolean;
+}>`
+  span {
+    font-size: 14px;
+    margin-top: 4px;
+    padding: 0 24px;
+    width: auto;
+
+    ${props =>
+      !props.showAll &&
+      css`
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `}
+  }
+
+  button {
+    background: transparent;
+    width: auto;
+    border: none;
+    margin-left: 24px;
+    max-width: 85px;
+    margin-top: 4px;
+    color: ${colors.green400};
   }
 `;
 

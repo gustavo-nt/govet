@@ -160,6 +160,44 @@ export const Calendar = styled.aside`
 
 export const Section = styled.div`
   margin-bottom: 24px;
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+
+    caret-color: ${colors.white};
+    background: ${colors.gray750};
+    border-radius: 10px;
+    border: 2px solid ${colors.gray750};
+
+    color: ${colors.gray550};
+    padding: 16px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    & + div {
+      margin-top: 8px;
+    }
+
+    input {
+      flex: 1;
+      border: 0;
+      color: ${colors.gray200};
+
+      background: transparent;
+
+      &:placeholder {
+        color: ${colors.gray550};
+      }
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: ${colors.white};
+        -webkit-box-shadow: 0 0 0px 1000px ${colors.gray750} inset;
+      }
+    }
+  }
 `;
 
 export const SectionTitle = styled.h4`

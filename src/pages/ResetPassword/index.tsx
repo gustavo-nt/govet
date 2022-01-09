@@ -1,9 +1,9 @@
 import React, { useRef, useCallback } from 'react';
-import { FiLock } from 'react-icons/fi';
+import { FiLock, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useToast } from '../../hooks/toast';
 
@@ -18,6 +18,7 @@ import { Container, Content, AnimationContainer, Background } from './styles';
 import api from '../../services/api';
 
 interface ResetPasswordFormData {
+  email: string;
   password: string;
   password_confirmation: string;
 }
@@ -27,7 +28,6 @@ const ResetPassword: React.FC = () => {
 
   const { addToast } = useToast();
   const history = useHistory();
-  const location = useLocation();
 
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
@@ -46,17 +46,12 @@ const ResetPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        const { password, password_confirmation } = data;
-        const token = location.search.replace('?token=', '');
-
-        if (!token) {
-          throw new Error();
-        }
+        const { password, password_confirmation, email } = data;
 
         await api.post('/password/reset', {
           password,
           password_confirmation,
-          token,
+          email,
         });
 
         addToast({
@@ -80,7 +75,7 @@ const ResetPassword: React.FC = () => {
         }
       }
     },
-    [addToast, history, location],
+    [addToast, history],
   );
 
   return (
@@ -91,6 +86,13 @@ const ResetPassword: React.FC = () => {
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Resetar Senha</h1>
+
+            <Input
+              icon={FiMail}
+              name="email"
+              type="text"
+              placeholder="Seu Email"
+            />
 
             <Input
               icon={FiLock}

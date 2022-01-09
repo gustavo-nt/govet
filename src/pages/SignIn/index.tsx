@@ -13,7 +13,13 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background, CopyrightBack } from './styles';
+import {
+  Container,
+  Content,
+  AnimationContainer,
+  Background,
+  CopyrightBack,
+} from './styles';
 import Logo from '../../components/Logo';
 import Checkbox from '../../components/Checkbox';
 
@@ -48,7 +54,7 @@ const SignIn: React.FC = () => {
         await signIn({
           email: data.email,
           password: data.password,
-          type: data.isAdmin ? 'admin' : 'client'
+          type: data.isAdmin ? 'admin' : 'client',
         });
 
         history.push('/dashboard');
@@ -86,14 +92,11 @@ const SignIn: React.FC = () => {
               placeholder="Senha"
             />
 
-            <Checkbox 
-              identifier="isAdmin"
-              title="Você é um administrator?"  
-            />
+            <Checkbox identifier="isAdmin" title="Você é um administrator?" />
 
             <Button type="submit">Entrar</Button>
 
-            <Link to="/forgot-password">Esqueci Minha Senha</Link>
+            <Link to="/reset-password">Esqueci Minha Senha</Link>
           </Form>
 
           <Link to="/signup">
