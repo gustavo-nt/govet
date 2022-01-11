@@ -85,3 +85,17 @@ export const Background = styled.div`
   background: url(${signInBackgroundImg});
   background-size: cover;
 `;
+
+export const CopyrightBack = styled.a`
+  position: fixed;
+  bottom: 3px;
+  right: 3px;
+  color: ${colors.gray300};
+  font-size: 10px;
+  text-decoration: none;
+  transition: all .3s;
+
+  &:hover {
+    color: ${shade(0.2, colors.gray300)};
+  }
+`;

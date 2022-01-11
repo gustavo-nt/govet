@@ -10,6 +10,7 @@ export const Container = styled.div`
   position: relative;
   font-size: 50px;
   cursor: pointer;
+  z-index: 0;
 
   ${props =>
     props.className === 'dashboard' &&

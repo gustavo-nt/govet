@@ -1,21 +1,20 @@
 import React, { useRef, useCallback } from 'react';
-import { FiLock, FiMail } from 'react-icons/fi';
+import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import logoImg from '../../assets/logo.svg';
-
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer, Background, CopyrightBack } from './styles';
 import api from '../../services/api';
+import Logo from '../../components/Logo';
 
 interface ResetPasswordFormData {
   email: string;
@@ -82,7 +81,7 @@ const ResetPassword: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="GoBarber" />
+          <Logo />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Resetar Senha</h1>
@@ -110,10 +109,18 @@ const ResetPassword: React.FC = () => {
 
             <Button type="submit">Alterar Senha</Button>
           </Form>
+
+          <Link to="/">
+            <FiLogIn />
+            Voltar para Logon
+          </Link>
         </AnimationContainer>
       </Content>
 
       <Background />
+      <CopyrightBack href="https://tvprefeito.com/primeira-feira-virtual-para-adocao-de-caes-e-gatos-de-niteroi-e-um-sucesso/">
+        https://tvprefeito.com/primeira-feira-virtual...
+      </CopyrightBack>
     </Container>
   );
 };

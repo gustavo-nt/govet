@@ -8,6 +8,10 @@ export const Container = styled.div``;
 export const Header = styled.header`
   padding: 32px;
   background: ${colors.gray700};
+
+  @media(max-width: 500px) {
+    padding: 32px 16px;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -366,6 +370,18 @@ export const Appointment = styled.div`
     div {
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  @media(max-width: 500px) {
+    > div {
+      strong {
+        width: 60%;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
   }
 `;

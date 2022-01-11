@@ -212,7 +212,7 @@ const Dashboard: React.FC = () => {
             <h1>
               {user.type === 'admin'
                 ? 'Horários Agendamentos'
-                : 'Meus Consultas'}
+                : 'Minhas Consultas'}
             </h1>
             {user.type === 'client' && (
               <ButtonAdd onClick={handleOpenModalCreateAppointment}>
