@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="" alt="GoVet" />
-</p>
-
 <h1 align="center">
     🚀 GoVet
 </h1>
@@ -23,7 +19,7 @@
 </p>
 
 <h3 align="center"> 
-🚧  Em produção  🚧
+🚧  Finalizado  🚧
 </h3>
 
 ### 🖥 Demonstração
@@ -75,14 +71,15 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Esse projeto foi utilizou das seguintes lib:
 
+- yup
 - Axios
 - Jest
+- unform
+- date-fns
+- react-modal
+- react-loading
 - react-router-dom
 - styled-components
-- react-modal
-- yup
-- date-fns
-- unform
 
 ### 📙 Arquitetura do Projeto
 
@@ -105,5 +102,5 @@ Esse projeto está sob a licença MIT.
 
 <hr/>
 
-Feito por Gustavo Teixeira e Gabriel Teixeira
+Feito por Gustavo Teixeira, Gabriel Teixeira e Jeferson Teixeira
 
