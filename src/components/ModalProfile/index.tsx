@@ -1,16 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { IoMdClose } from 'react-icons/io';
-import { FiCheck } from 'react-icons/fi';
-import ReactLoading from 'react-loading';
+
 import Button from '../Button';
+import ReactLoading from 'react-loading';
 import { Avatar } from '../../utils/lists';
 import { colors } from '../../styles/colors';
 
-import { Container, Content, ContentLoading, CheckContent, LinkImage } from './styles';
-import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+
+import { FiCheck } from 'react-icons/fi';
+import { IoMdClose } from 'react-icons/io';
+
+import { Container, Content, ContentLoading, CheckContent, LinkImage } from './styles';
+import api from '../../services/api';
+
 
 interface ModalProfileProps {
   isOpen: boolean;
@@ -82,7 +86,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
       isOpen={isOpen}
       onRequestClose={handleCloseModal}
       overlayClassName="react-modal-overlay"
-      className="react-modal-content"
+      className="react-modal-content profile"
     >
       <button
         type="button"

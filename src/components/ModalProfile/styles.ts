@@ -18,6 +18,12 @@ export const Container = styled.div`
       width: 160px;
     }
   }
+
+  @media(max-width: 500px) {
+    > h2 {
+      font-size: 18px;
+    }
+  }
 `;
 
 export const Content = styled.div`
@@ -37,6 +43,14 @@ export const Content = styled.div`
 
     &:nth-child(5n) {
       margin-right: 0;
+    }
+  }
+
+  @media(max-width: 500px) {
+    .content-item {
+      &:nth-child(5n) {
+        margin-right: 23px;
+      }
     }
   }
 `;

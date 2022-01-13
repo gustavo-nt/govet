@@ -67,7 +67,29 @@ export default createGlobalStyle`
 
       /* Handle */
       &::-webkit-scrollbar-thumb {
-        background: #3e3b47;
+        background: ${colors.gray650};
+        border-radius: 10px;
+      }
+    }
+
+    &.profile {
+      max-height: 90%;
+      overflow: auto;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: ${colors.gray650};
         border-radius: 10px;
       }
     }
@@ -88,6 +110,15 @@ export default createGlobalStyle`
 
     &:hover {
       filter: brightness(0.8);
+    }
+  }
+
+  @media(max-width: 500px) {
+    .react-modal-content {
+      &.appointment,
+      &.profile {
+        padding: 3rem 24px;
+      }
     }
   }
 `;

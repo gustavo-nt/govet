@@ -1,9 +1,14 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
-import Modal from 'react-modal';
+import { useToast } from '../../hooks/toast';
+import api from '../../services/api';
 import { format } from 'date-fns';
-import { IoMdClose } from 'react-icons/io';
+import Modal from 'react-modal';
+
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import Button from '../Button';
+
+import { IoMdClose } from 'react-icons/io';
+import { MdOutlineHideImage } from 'react-icons/md';
 
 import {
   Container,
@@ -18,9 +23,6 @@ import {
   Hour,
   HourText,
 } from './styles';
-import { useToast } from '../../hooks/toast';
-import api from '../../services/api';
-import { MdOutlineHideImage } from 'react-icons/md';
 
 export interface Provider {
   id: string;

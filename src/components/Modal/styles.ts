@@ -166,6 +166,12 @@ export const Calendar = styled.aside`
     border-radius: 10px;
     color: #232129 !important;
   }
+
+  @media(max-width: 500px) {
+    .DayPicker-wrapper {
+      margin-right: 24px;
+    }
+  }
 `;
 
 export const Section = styled.div`
