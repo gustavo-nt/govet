@@ -216,7 +216,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({
       </button>
 
       <Container>
-        <h3>Selecione um veterinário: </h3>
+        <h3>Selecione um empresário: </h3>
         <Providers>
           {providers.map(provider => (
             <ProviderContainer
