@@ -4,16 +4,16 @@
 <p align="center">Aplicação GoVet Frontend</p>
 
 <p align="center">
-  <img src="https://img.shields.io/static/v1?label=react&message=16.13.1&color=61DAFB&logo=react" />
-  <img src="https://img.shields.io/static/v1?label=typescript&message=4.0.2&color=blue&logo=typescript" />
-  <img src="https://img.shields.io/badge/last%20commit-october-orange" />
+  <img src="https://img.shields.io/badge/react%20version-16.13.1-informational"/>
+  <img src="https://img.shields.io/badge/score-10.00-important" />
+  <img src="https://img.shields.io/badge/last%20commit-november-blue" />
   <img src="https://img.shields.io/badge/license-MIT-success"/>
 </p>
 
 <p align="center">
   <a href="#-features">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-pré-requisitos">Pré-Requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-rodando-frontend">Frontend</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-rodando-a-aplicação-web">Frontend</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-licença">Lincença</a>
 </p>
@@ -21,11 +21,6 @@
 <h3 align="center"> 
 🚧  Finalizado  🚧
 </h3>
-
-### 🖥 Demonstração
-<p>
-  <img src="https://github.com/gustavo-nt/govet/blob/master/src/assets/dashboard.jpg" alt="Dashboard"/>  
-</p>
 
 ### 📎 Features
 
@@ -37,6 +32,14 @@
 - [x] Dashboard do Prestador de Serviços
 - [x] Próximos Agendamentos
 - [x] Listagem de Agendamentos de uma data selecionada
+
+### 💻 Projeto
+O Govet é uma aplicação voltada para agendamento de consultas veterinárias para clientes de zonas rurais, visando agilizar esse processo. Essa aplicação foi desenvolvida como Atividade Extensionalista da Uninter.
+
+### 🖼 Demonstração
+<p>
+   <img src="https://github.com/gustavo-nt/govet/blob/master/src/assets/dashboard.jpg" alt="Dashboard"/>  
+</p>
 
 ### ⚙ Pré-requisitos
 
@@ -103,4 +106,3 @@ Esse projeto está sob a licença MIT.
 <hr/>
 
 Feito por Gustavo Teixeira, Gabriel Teixeira e Jeferson Teixeira
-
